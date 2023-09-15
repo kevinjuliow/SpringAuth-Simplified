@@ -34,7 +34,11 @@ public class AuthControllers {
     }
 
     @GetMapping()
-    public UserDtosToken loginUser (@RequestBody UserDtos body){
-        return authServices.loginUser(body.getUsername() , body.getPassword());
+    public ResponseEntity<?> loginUser (@RequestBody UserDtos body){
+        UserDtosToken user =  authServices.loginUser(body.getUsername() , body.getPassword());
+        if (user.getUsername() == null){
+            return new ResponseEntity<>("User Not Found" , HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Username : "+user.getUsername()+",\nTokens : "+user.getToken() , HttpStatus.OK);
     }
 }

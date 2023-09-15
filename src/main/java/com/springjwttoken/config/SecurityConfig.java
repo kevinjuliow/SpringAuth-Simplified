@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(e -> {
                     e.requestMatchers("/api/v1/auth/**").permitAll();
                     e.requestMatchers("/api/v1/admin/**").hasRole("ADMIN");
-                    e.requestMatchers("/api/v1/admin/**").hasAnyRole("ADMIN" , "USER");
+                    e.requestMatchers("/api/v1/user/**").hasAnyRole("ADMIN" , "USER");
                     e.anyRequest().authenticated();
                 });
         http.oauth2ResourceServer()

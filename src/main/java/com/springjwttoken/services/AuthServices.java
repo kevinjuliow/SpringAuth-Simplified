@@ -40,9 +40,8 @@ public class AuthServices {
 
     public UserDtosToken loginUser (String username ,String password) {
         try{
-            Authentication auth =authenticationManager.authenticate(
+            Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username , password));
-
             String token = jwtGenerator(auth) ;
             return new UserDtosToken(userRepo.findByUsername(username).get().getUsername() , password , token) ;
         }
